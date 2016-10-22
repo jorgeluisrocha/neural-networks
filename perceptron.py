@@ -1,8 +1,10 @@
 """
 AUTHOR: jorgeluisrocha
-LAST UPDATED: 10-21-2016
+LAST UPDATED: 10-22-2016
 
-This perceptron in its current conception is to learn how to utilize an OR gate.
+This file in its current conception is to create a Perceptron object and
+has two functions which allows it to learn how to behave like an OR gate and
+an AND gate.
 """
 
 from random import choice
@@ -18,8 +20,8 @@ class Perceptron:
         self.eta    = 0.2   ## Learning rate
         self.n      = 100   ## Number of iterations
 
-    def ORGate(self):
-        ## Create an lambda function for the step function in a perceptron.
+    def ORGate(self, A, B):
+        ## Create a lambda function for the step function in a perceptron.
         unit_step = lambda x: 0 if x < 0 else 1
 
 
@@ -39,12 +41,13 @@ class Perceptron:
         	self.errors.append(error)
         	self.w         += self.eta * error * x
 
-        for x, _ in training_data:
-        	result          = dot(x, self.w)
-        	print("{}: {} -> {}".format(x[:2], result, unit_step(result)))
+        data = array([A, B, 1])
 
-    def ANDGate(self):
-    	## Create an lambda function for the step function in a perceptron.
+        result          = dot(data, self.w)
+        print("{}: {} -> {}".format(data[:2], result, unit_step(result)))
+
+    def ANDGate(self, A, B):
+    	## Create a lambda function for the step function in a perceptron.
         unit_step = lambda x: 0 if x < 0 else 1
 
 
@@ -64,8 +67,9 @@ class Perceptron:
         	self.errors.append(error)
         	self.w         += self.eta * error * x
 
-        for x, _ in training_data:
-        	result          = dot(x, self.w)
-        	print("{}: {} -> {}".format(x[:2], result, unit_step(result)))
+        data = array([A, B, 1])
+        
+        result          = dot(data, self.w)
+        print("{}: {} -> {}".format(data[:2], result, unit_step(result)))
 
 
